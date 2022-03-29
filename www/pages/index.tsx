@@ -15,8 +15,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {result.data?.item.map(({ id }) => {
-          return <p>{id}</p>;
+        {result.data?.item.map(({ id }, index) => {
+          return <p key={index}>{id}</p>;
         })}
       </main>
     </div>
