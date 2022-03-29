@@ -1,0 +1,10 @@
+table:
+  name: bucket_item
+  schema: public
+object_relationships:
+- name: bucket
+  using:
+    foreign_key_constraint_on: bucket_id
+- name: item
+  using:
+    foreign_key_constraint_on: item_id

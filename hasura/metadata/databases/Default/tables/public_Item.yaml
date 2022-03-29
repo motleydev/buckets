@@ -1,0 +1,19 @@
+table:
+  name: item
+  schema: public
+array_relationships:
+- name: bucket_items
+  using:
+    foreign_key_constraint_on:
+      column: item_id
+      table:
+        name: bucket_item
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - created_at
+    - id
+    - updated_at
+    filter: {}
+  role: anonymous

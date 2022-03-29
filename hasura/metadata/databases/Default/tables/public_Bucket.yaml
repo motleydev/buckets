@@ -1,0 +1,11 @@
+table:
+  name: bucket
+  schema: public
+array_relationships:
+- name: items
+  using:
+    foreign_key_constraint_on:
+      column: bucket_id
+      table:
+        name: bucket_item
+        schema: public
