@@ -1,3 +1,4 @@
 - "!include public_bucket.yaml"
 - "!include public_bucket_item.yaml"
 - "!include public_item.yaml"
+- "!include public_order.yaml"
