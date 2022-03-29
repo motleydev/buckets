@@ -813,6 +813,10 @@ export type Mutation_Root = {
   delete_item?: Maybe<Item_Mutation_Response>;
   /** delete single row from the table: "item" */
   delete_item_by_pk?: Maybe<Item>;
+  /** delete data from the table: "order" */
+  delete_order?: Maybe<Order_Mutation_Response>;
+  /** delete single row from the table: "order" */
+  delete_order_by_pk?: Maybe<Order>;
   /** insert data into the table: "bucket" */
   insert_bucket?: Maybe<Bucket_Mutation_Response>;
   /** insert data into the table: "bucket_item" */
@@ -825,6 +829,10 @@ export type Mutation_Root = {
   insert_item?: Maybe<Item_Mutation_Response>;
   /** insert a single row into the table: "item" */
   insert_item_one?: Maybe<Item>;
+  /** insert data into the table: "order" */
+  insert_order?: Maybe<Order_Mutation_Response>;
+  /** insert a single row into the table: "order" */
+  insert_order_one?: Maybe<Order>;
   /** update data of the table: "bucket" */
   update_bucket?: Maybe<Bucket_Mutation_Response>;
   /** update single row of the table: "bucket" */
@@ -837,6 +845,10 @@ export type Mutation_Root = {
   update_item?: Maybe<Item_Mutation_Response>;
   /** update single row of the table: "item" */
   update_item_by_pk?: Maybe<Item>;
+  /** update data of the table: "order" */
+  update_order?: Maybe<Order_Mutation_Response>;
+  /** update single row of the table: "order" */
+  update_order_by_pk?: Maybe<Order>;
 };
 
 
@@ -872,6 +884,18 @@ export type Mutation_RootDelete_ItemArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Item_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_OrderArgs = {
+  where: Order_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Order_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -915,6 +939,20 @@ export type Mutation_RootInsert_ItemArgs = {
 export type Mutation_RootInsert_Item_OneArgs = {
   object: Item_Insert_Input;
   on_conflict?: InputMaybe<Item_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_OrderArgs = {
+  objects: Array<Order_Insert_Input>;
+  on_conflict?: InputMaybe<Order_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Order_OneArgs = {
+  object: Order_Insert_Input;
+  on_conflict?: InputMaybe<Order_On_Conflict>;
 };
 
 
@@ -965,6 +1003,72 @@ export type Mutation_RootUpdate_Item_By_PkArgs = {
   pk_columns: Item_Pk_Columns_Input;
 };
 
+
+/** mutation root */
+export type Mutation_RootUpdate_OrderArgs = {
+  _inc?: InputMaybe<Order_Inc_Input>;
+  _set?: InputMaybe<Order_Set_Input>;
+  where: Order_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Order_By_PkArgs = {
+  _inc?: InputMaybe<Order_Inc_Input>;
+  _set?: InputMaybe<Order_Set_Input>;
+  pk_columns: Order_Pk_Columns_Input;
+};
+
+/** columns and relationships of "order" */
+export type Order = {
+  __typename?: 'order';
+  id: Scalars['Int'];
+};
+
+/** aggregated selection of "order" */
+export type Order_Aggregate = {
+  __typename?: 'order_aggregate';
+  aggregate?: Maybe<Order_Aggregate_Fields>;
+  nodes: Array<Order>;
+};
+
+/** aggregate fields of "order" */
+export type Order_Aggregate_Fields = {
+  __typename?: 'order_aggregate_fields';
+  avg?: Maybe<Order_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Order_Max_Fields>;
+  min?: Maybe<Order_Min_Fields>;
+  stddev?: Maybe<Order_Stddev_Fields>;
+  stddev_pop?: Maybe<Order_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Order_Stddev_Samp_Fields>;
+  sum?: Maybe<Order_Sum_Fields>;
+  var_pop?: Maybe<Order_Var_Pop_Fields>;
+  var_samp?: Maybe<Order_Var_Samp_Fields>;
+  variance?: Maybe<Order_Variance_Fields>;
+};
+
+
+/** aggregate fields of "order" */
+export type Order_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Order_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Order_Avg_Fields = {
+  __typename?: 'order_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "order". All fields are combined with a logical 'AND'. */
+export type Order_Bool_Exp = {
+  _and?: InputMaybe<Array<Order_Bool_Exp>>;
+  _not?: InputMaybe<Order_Bool_Exp>;
+  _or?: InputMaybe<Array<Order_Bool_Exp>>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+};
+
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls last */
@@ -980,6 +1084,119 @@ export enum Order_By {
   /** in descending order, nulls last */
   DescNullsLast = 'desc_nulls_last'
 }
+
+/** unique or primary key constraints on table "order" */
+export enum Order_Constraint {
+  /** unique or primary key constraint */
+  OrderPkey = 'order_pkey'
+}
+
+/** input type for incrementing numeric columns in table "order" */
+export type Order_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "order" */
+export type Order_Insert_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate max on columns */
+export type Order_Max_Fields = {
+  __typename?: 'order_max_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** aggregate min on columns */
+export type Order_Min_Fields = {
+  __typename?: 'order_min_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** response of any mutation on the table "order" */
+export type Order_Mutation_Response = {
+  __typename?: 'order_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Order>;
+};
+
+/** on_conflict condition type for table "order" */
+export type Order_On_Conflict = {
+  constraint: Order_Constraint;
+  update_columns?: Array<Order_Update_Column>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "order". */
+export type Order_Order_By = {
+  id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: order */
+export type Order_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "order" */
+export enum Order_Select_Column {
+  /** column name */
+  Id = 'id'
+}
+
+/** input type for updating data in table "order" */
+export type Order_Set_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** aggregate stddev on columns */
+export type Order_Stddev_Fields = {
+  __typename?: 'order_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Order_Stddev_Pop_Fields = {
+  __typename?: 'order_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Order_Stddev_Samp_Fields = {
+  __typename?: 'order_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type Order_Sum_Fields = {
+  __typename?: 'order_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "order" */
+export enum Order_Update_Column {
+  /** column name */
+  Id = 'id'
+}
+
+/** aggregate var_pop on columns */
+export type Order_Var_Pop_Fields = {
+  __typename?: 'order_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Order_Var_Samp_Fields = {
+  __typename?: 'order_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Order_Variance_Fields = {
+  __typename?: 'order_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
 
 export type Query_Root = {
   __typename?: 'query_root';
@@ -1001,6 +1218,12 @@ export type Query_Root = {
   item_aggregate: Item_Aggregate;
   /** fetch data from the table: "item" using primary key columns */
   item_by_pk?: Maybe<Item>;
+  /** fetch data from the table: "order" */
+  order: Array<Order>;
+  /** fetch aggregated fields from the table: "order" */
+  order_aggregate: Order_Aggregate;
+  /** fetch data from the table: "order" using primary key columns */
+  order_by_pk?: Maybe<Order>;
 };
 
 
@@ -1072,6 +1295,29 @@ export type Query_RootItem_By_PkArgs = {
   id: Scalars['Int'];
 };
 
+
+export type Query_RootOrderArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+
+export type Query_RootOrder_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+
+export type Query_RootOrder_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "bucket" */
@@ -1092,6 +1338,12 @@ export type Subscription_Root = {
   item_aggregate: Item_Aggregate;
   /** fetch data from the table: "item" using primary key columns */
   item_by_pk?: Maybe<Item>;
+  /** fetch data from the table: "order" */
+  order: Array<Order>;
+  /** fetch aggregated fields from the table: "order" */
+  order_aggregate: Order_Aggregate;
+  /** fetch data from the table: "order" using primary key columns */
+  order_by_pk?: Maybe<Order>;
 };
 
 
@@ -1160,6 +1412,29 @@ export type Subscription_RootItem_AggregateArgs = {
 
 
 export type Subscription_RootItem_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootOrderArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrder_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Order_Order_By>>;
+  where?: InputMaybe<Order_Bool_Exp>;
+};
+
+
+export type Subscription_RootOrder_By_PkArgs = {
   id: Scalars['Int'];
 };
 
@@ -3040,6 +3315,46 @@ export default {
             ]
           },
           {
+            "name": "delete_order",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_mutation_response",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "where",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "delete_order_by_pk",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "id",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "insert_bucket",
             "type": {
               "kind": "OBJECT",
@@ -3197,6 +3512,66 @@ export default {
             "type": {
               "kind": "OBJECT",
               "name": "item",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "object",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              },
+              {
+                "name": "on_conflict",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "insert_order",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_mutation_response",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "objects",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "LIST",
+                    "ofType": {
+                      "kind": "NON_NULL",
+                      "ofType": {
+                        "kind": "SCALAR",
+                        "name": "Any"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "name": "on_conflict",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "insert_order_one",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order",
               "ofType": null
             },
             "args": [
@@ -3422,6 +3797,441 @@ export default {
                 }
               }
             ]
+          },
+          {
+            "name": "update_order",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_mutation_response",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "_inc",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "_set",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "where",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "update_order_by_pk",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "_inc",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "_set",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "pk_columns",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_aggregate",
+        "fields": [
+          {
+            "name": "aggregate",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_aggregate_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "nodes",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "order",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_aggregate_fields",
+        "fields": [
+          {
+            "name": "avg",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_avg_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "count",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": [
+              {
+                "name": "columns",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "distinct",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "max",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_max_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "min",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_min_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "stddev",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_stddev_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "stddev_pop",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_stddev_pop_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "stddev_samp",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_stddev_samp_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "sum",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_sum_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "var_pop",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_var_pop_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "var_samp",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_var_samp_fields",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "variance",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order_variance_fields",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_avg_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_max_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_min_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_mutation_response",
+        "fields": [
+          {
+            "name": "affected_rows",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Any"
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "returning",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "order",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_stddev_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_stddev_pop_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_stddev_samp_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_sum_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_var_pop_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_var_samp_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "order_variance_fields",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
           }
         ],
         "interfaces": []
@@ -3867,6 +4677,152 @@ export default {
                 }
               }
             ]
+          },
+          {
+            "name": "order",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "order",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "args": [
+              {
+                "name": "distinct_on",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "limit",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "order_by",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "where",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "order_aggregate",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "order_aggregate",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "distinct_on",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "limit",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "order_by",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "where",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "order_by_pk",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "id",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
           }
         ],
         "interfaces": []
@@ -4298,6 +5254,152 @@ export default {
             "type": {
               "kind": "OBJECT",
               "name": "item",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "id",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Any"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "order",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "order",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "args": [
+              {
+                "name": "distinct_on",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "limit",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "order_by",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "where",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "order_aggregate",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "order_aggregate",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "distinct_on",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "limit",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "offset",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              },
+              {
+                "name": "order_by",
+                "type": {
+                  "kind": "LIST",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Any"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "where",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Any"
+                }
+              }
+            ]
+          },
+          {
+            "name": "order_by_pk",
+            "type": {
+              "kind": "OBJECT",
+              "name": "order",
               "ofType": null
             },
             "args": [

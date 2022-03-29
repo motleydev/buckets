@@ -9,3 +9,11 @@ array_relationships:
       table:
         name: bucket_item
         schema: public
+select_permissions:
+- permission:
+    columns:
+    - id
+    - created_at
+    - updated_at
+    filter: {}
+  role: anonymous
