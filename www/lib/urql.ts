@@ -24,7 +24,7 @@ const createUrqlClient = (data: any) => {
   });
   return createClient({
     exchanges: [dedupExchange, cacheExchange, ssr, fetchExchange],
-    url: process.env.NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT as string,
+    url: process.env.HASURA_PROJECT_ENDPOINT as string,
   });
 };
 
