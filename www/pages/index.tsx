@@ -5,7 +5,8 @@ import styles from "../styles/Home.module.css";
 import { useGetItemsQuery } from "../lib/graphql";
 
 const Home: NextPage = () => {
-  const [result] = useGetItemsQuery();
+  const [{ data, fetching, error, operation }, executeQuery] =
+    useGetItemsQuery();
   return (
     <div className={styles.container}>
       <Head>
@@ -15,7 +16,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        {result.data?.item.map(({ id }, index) => {
+        {data?.item.map(({ id }, index) => {
           return <p key={index}>{id}</p>;
         })}
       </main>
