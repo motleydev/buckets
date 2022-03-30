@@ -5,8 +5,7 @@ import styles from "../styles/Home.module.css";
 import { useGetItemsQuery } from "../lib/graphql";
 
 const Home: NextPage = () => {
-  const [{ data, fetching, error, operation }, executeQuery] =
-    useGetItemsQuery();
+  const [{ data }] = useGetItemsQuery();
   return (
     <div className={styles.container}>
       <Head>
