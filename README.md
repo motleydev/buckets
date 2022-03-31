@@ -5,5 +5,3 @@
 5. Create anonymous role at Hasura.
 6. Apply CI/CD from hasura metadata.
 7. Inspect vercel deploy.
-
-Hope

@@ -4,8 +4,6 @@
 -- DROP table "public"."order";
 
 
-DROP TABLE "public"."order";
-
 DELETE FROM "public"."bucket_item" WHERE "id" = 3;
 
 DELETE FROM "public"."bucket_item" WHERE "id" = 2;
@@ -20,6 +18,6 @@ alter table "public"."item" rename to "Item";
 
 alter table "public"."bucket" rename to "Bucket";
 
-DROP TABLE "public"."Bucket";
+DROP TABLE "public"."bucket";
 
-DROP TABLE "public"."Item";
+DROP TABLE "public"."item";
