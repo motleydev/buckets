@@ -15,7 +15,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="grid grid-cols-2 gap-x-4 mx-auto max-w-3xl">
+      <main className="grid grid-cols-2 gap-x-4 mx-auto max-w-3xl mb-4">
         <Items />
         <Buckets />
       </main>

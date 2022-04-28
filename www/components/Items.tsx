@@ -7,6 +7,8 @@ type Props = {};
 export default function Items({}: Props) {
   const [{ data }] = useGetItemsQuery();
 
+  const [newItem, setNewItem] = React.useState("");
+
   const { draggedItem, receivingBucket, setDraggingItem, addToBucket } =
     useStore((store) => store);
 
@@ -24,24 +26,42 @@ export default function Items({}: Props) {
   };
 
   return (
-    <div className="bg-purple-100 rounded-lg p-4 grid grid-cols-12">
-      {data?.item.map((item, index) => {
-        return (
-          <div
-            draggable="true"
-            onDragStart={(e) => {
-              handleOnDrag(e, item);
-            }}
-            onDragEnd={(e) => {
-              handleOnDrop(e);
-            }}
-            className="border-2 border-purple-300 bg-white p-2 rounded-lg h-12"
-            key={index}
-          >
-            {item?.id}
-          </div>
-        );
-      })}
+    <div className="bg-purple-100 rounded-lg p-4 flex flex-wrap gap-y-2">
+      <div className="grid grid-cols-12">
+        {data?.item.map((item, index) => {
+          return (
+            <div
+              draggable="true"
+              onDragStart={(e) => {
+                handleOnDrag(e, item);
+              }}
+              onDragEnd={(e) => {
+                handleOnDrop(e);
+              }}
+              className="border-2 border-purple-300 bg-white p-2 rounded-lg h-12"
+              key={index}
+            >
+              {item?.id}
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex gap-2">
+        <input
+          className="p-2 rounded-lg focus:outline-purple-400 focus:bg-white bg-transparent outline-2 outline-dashed outline-purple-200"
+          placeholder="Add item"
+          value={newItem}
+          onChange={(e) => {
+            e.preventDefault();
+            setNewItem(e.target.value);
+          }}
+        />
+        {newItem.length > 0 && (
+          <button className="rounded-lg bg-purple-600 p-2 text-white">
+            Add Item
+          </button>
+        )}
+      </div>
     </div>
   );
 }

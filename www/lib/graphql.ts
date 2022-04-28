@@ -1176,6 +1176,14 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
+export type InsertBucketItemMutationVariables = Exact<{
+  bucket_id: Scalars['Int'];
+  item_id: Scalars['Int'];
+}>;
+
+
+export type InsertBucketItemMutation = { __typename?: 'mutation_root', insert_bucket_item_one?: { __typename?: 'bucket_item', id: number } | null };
+
 export type GetBucketSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4330,6 +4338,20 @@ export default {
   }
 } as unknown as IntrospectionQuery;
 
+export const InsertBucketItemDocument = gql`
+    mutation InsertBucketItem($bucket_id: Int!, $item_id: Int!) {
+  insert_bucket_item_one(
+    object: {bucket_id: $bucket_id, item_id: $item_id}
+    on_conflict: {constraint: bucket_item_pkey, update_columns: updated_at}
+  ) {
+    id
+  }
+}
+    `;
+
+export function useInsertBucketItemMutation() {
+  return Urql.useMutation<InsertBucketItemMutation, InsertBucketItemMutationVariables>(InsertBucketItemDocument);
+};
 export const GetBucketDocument = gql`
     subscription GetBucket {
   bucket {

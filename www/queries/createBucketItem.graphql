@@ -1,0 +1,8 @@
+mutation InsertBucketItem($bucket_id: Int!, $item_id: Int!) {
+  insert_bucket_item_one(
+    object: { bucket_id: $bucket_id, item_id: $item_id }
+    on_conflict: { constraint: bucket_item_pkey, update_columns: updated_at }
+  ) {
+    id
+  }
+}
