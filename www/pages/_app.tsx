@@ -1,16 +1,9 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Provider } from "urql";
-import { useUrql } from "../lib/urql";
+import withUrqlClient from "../lib/urql";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const client = useUrql();
-
-  return (
-    <Provider value={client}>
-      <Component {...pageProps} />
-    </Provider>
-  );
+  return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default withUrqlClient(MyApp);

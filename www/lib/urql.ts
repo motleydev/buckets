@@ -1,43 +1,50 @@
-import { useMemo } from "react";
 import {
-  createClient,
-  dedupExchange,
-  cacheExchange,
-  fetchExchange,
-  ssrExchange,
-  Client,
-} from "urql";
+  subscriptionExchange,
+  defaultExchanges,
+  ExchangeInput,
+} from "@urql/core";
+import { withUrqlClient } from "next-urql";
+import { createClient as createWSClient } from "graphql-ws";
+import { ExchangeIO, createClient } from "urql";
 
-let urqlClient: Client;
+const isServerSide = typeof window === "undefined";
 
-const isServer = typeof window === "undefined";
+const wsClient = () =>
+  createWSClient({
+    url: process.env.NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT?.replace(
+      "http",
+      "ws"
+    ) as string,
+  });
 
-let ssr = ssrExchange({
-  isClient: !isServer,
-  initialState: undefined,
+const noopExchange = ({ forward }: ExchangeInput): ExchangeIO => {
+  return (operations$) => {
+    const operationResult$ = forward(operations$);
+    return operationResult$;
+  };
+};
+
+const subscribeOrNoopExchange = () =>
+  isServerSide
+    ? noopExchange
+    : subscriptionExchange({
+        forwardSubscription: (operation) => {
+          return {
+            subscribe: (sink) => ({
+              unsubscribe: wsClient().subscribe(operation, sink),
+            }),
+          };
+        },
+      });
+
+const clientConfig = {
+  url: process.env.NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT as string,
+  exchanges: [...defaultExchanges, subscribeOrNoopExchange()],
+};
+
+export const client = createClient(clientConfig);
+
+export default withUrqlClient((ssrExchange) => {
+  const exchanges = [...clientConfig.exchanges, ssrExchange];
+  return { ...client, exchanges };
 });
-
-const createUrqlClient = (data: any) => {
-  ssr = ssrExchange({
-    isClient: !isServer,
-    initialState: data,
-  });
-  return createClient({
-    exchanges: [dedupExchange, cacheExchange, ssr, fetchExchange],
-    url: process.env.NEXT_PUBLIC_HASURA_PROJECT_ENDPOINT as string,
-  });
-};
-
-export const getClient = () => {
-  const _urqlClient = urqlClient ?? createUrqlClient(ssr.extractData());
-
-  if (typeof window === "undefined") return _urqlClient;
-  if (!urqlClient) urqlClient = _urqlClient;
-
-  return _urqlClient;
-};
-
-export const useUrql = () => {
-  const store = useMemo(() => getClient(), []);
-  return store;
-};
