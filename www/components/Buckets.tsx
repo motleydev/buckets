@@ -18,11 +18,18 @@ export default function Buckets({}: Props) {
     setReceivingBucket(null);
   };
 
+  const handleCreateBucket = async () => {
+    await fetch("/api/createBucket");
+  };
+
   return (
     <div className="bg-yellow-100 rounded-lg p-4 space-y-2">
       {data?.bucket.map((bucket, i) => {
         return (
-          <div key={i} className="bg bg-yellow-300 rounded-lg p-2 relative">
+          <div
+            key={i}
+            className="h-10 bg bg-yellow-300 rounded-lg p-2 relative"
+          >
             {draggingState === DRAGGING_STATE.DRAGGING && (
               <div className="absolute left-0 top-0 w-full h-full rounded-lg p-2 bg-yellow-300">
                 <div
@@ -45,7 +52,10 @@ export default function Buckets({}: Props) {
           </div>
         );
       })}
-      <button className="border-2 border-dashed border-yellow-300 rounded-lg p-2 hover:bg-yellow-300 w-full">
+      <button
+        onClick={handleCreateBucket}
+        className="border-2 border-dashed border-yellow-300 rounded-lg p-2 hover:bg-yellow-300 w-full"
+      >
         Add Bucket
       </button>
     </div>

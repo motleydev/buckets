@@ -1,6 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
+  CreateBucketDocument,
+  CreateBucketMutation,
   InsertBucketItemMutation,
   InsertBucketItemMutationVariables,
 } from "../../lib/graphql";
@@ -14,12 +16,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  console.log(req.body);
-  // const userResult = await client
-  //     .mutation<InsertBucketItemMutation, InsertBucketItemMutationVariables>(CreateUser, {
-  //       item_id: 1,
-  //       bucket_id: 1
-  //     })
-  //     .toPromise();
+  const bucketResult = await client
+    .mutation<CreateBucketMutation>(CreateBucketDocument)
+    .toPromise();
   res.status(200).json({ name: "John Doe" });
 }

@@ -4,6 +4,7 @@ subscription GetBucket {
     items {
       id
       item {
+        text
         id
       }
     }

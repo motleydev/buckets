@@ -1,0 +1,5 @@
+mutation CreateItem($text: String) {
+  insert_item_one(object: { text: $text }) {
+    id
+  }
+}

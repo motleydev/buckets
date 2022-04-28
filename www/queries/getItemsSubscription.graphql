@@ -1,0 +1,6 @@
+subscription GetItemsSubscription {
+  item {
+    id
+    text
+  }
+}

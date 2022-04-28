@@ -39,8 +39,14 @@ const useStore = create<GameState>()((set, get) => ({
   addItem: (item) => {
     //   set({ gameStatus: status });
   },
-  addToBucket: () => {
+  addToBucket: async () => {
     //   set({ gameStatus: status });
+    console.log("test");
+    await fetch("/api/addToBucket", {
+      body: JSON.stringify({
+        id: "123",
+      }),
+    });
   },
   removeFromBucket: (bucket_item) => {
     //   set({ gameStatus: status });

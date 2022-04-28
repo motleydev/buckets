@@ -29,6 +29,39 @@ export type Int_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
+/** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
+export type String_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['String']>;
+  _gt?: InputMaybe<Scalars['String']>;
+  _gte?: InputMaybe<Scalars['String']>;
+  /** does the column match the given case-insensitive pattern */
+  _ilike?: InputMaybe<Scalars['String']>;
+  _in?: InputMaybe<Array<Scalars['String']>>;
+  /** does the column match the given POSIX regular expression, case insensitive */
+  _iregex?: InputMaybe<Scalars['String']>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  /** does the column match the given pattern */
+  _like?: InputMaybe<Scalars['String']>;
+  _lt?: InputMaybe<Scalars['String']>;
+  _lte?: InputMaybe<Scalars['String']>;
+  _neq?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given case-insensitive pattern */
+  _nilike?: InputMaybe<Scalars['String']>;
+  _nin?: InputMaybe<Array<Scalars['String']>>;
+  /** does the column NOT match the given POSIX regular expression, case insensitive */
+  _niregex?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given pattern */
+  _nlike?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given POSIX regular expression, case sensitive */
+  _nregex?: InputMaybe<Scalars['String']>;
+  /** does the column NOT match the given SQL regular expression */
+  _nsimilar?: InputMaybe<Scalars['String']>;
+  /** does the column match the given POSIX regular expression, case sensitive */
+  _regex?: InputMaybe<Scalars['String']>;
+  /** does the column match the given SQL regular expression */
+  _similar?: InputMaybe<Scalars['String']>;
+};
+
 /** columns and relationships of "bucket" */
 export type Bucket = {
   __typename?: 'bucket';
@@ -588,6 +621,7 @@ export type Item = {
   bucket_items_aggregate: Bucket_Item_Aggregate;
   created_at: Scalars['timestamptz'];
   id: Scalars['Int'];
+  text?: Maybe<Scalars['String']>;
   updated_at: Scalars['timestamptz'];
 };
 
@@ -655,6 +689,7 @@ export type Item_Bool_Exp = {
   bucket_items?: InputMaybe<Bucket_Item_Bool_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
+  text?: InputMaybe<String_Comparison_Exp>;
   updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -674,6 +709,7 @@ export type Item_Insert_Input = {
   bucket_items?: InputMaybe<Bucket_Item_Arr_Rel_Insert_Input>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -682,6 +718,7 @@ export type Item_Max_Fields = {
   __typename?: 'item_max_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -690,6 +727,7 @@ export type Item_Min_Fields = {
   __typename?: 'item_min_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['Int']>;
+  text?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -721,6 +759,7 @@ export type Item_Order_By = {
   bucket_items_aggregate?: InputMaybe<Bucket_Item_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  text?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -736,6 +775,8 @@ export enum Item_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Text = 'text',
+  /** column name */
   UpdatedAt = 'updated_at'
 }
 
@@ -743,6 +784,7 @@ export enum Item_Select_Column {
 export type Item_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   id?: InputMaybe<Scalars['Int']>;
+  text?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -776,6 +818,8 @@ export enum Item_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  Text = 'text',
   /** column name */
   UpdatedAt = 'updated_at'
 }
@@ -1176,6 +1220,11 @@ export type Timestamptz_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
+export type CreateBucketMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CreateBucketMutation = { __typename?: 'mutation_root', insert_bucket_one?: { __typename?: 'bucket', id: number } | null };
+
 export type InsertBucketItemMutationVariables = Exact<{
   bucket_id: Scalars['Int'];
   item_id: Scalars['Int'];
@@ -1184,15 +1233,27 @@ export type InsertBucketItemMutationVariables = Exact<{
 
 export type InsertBucketItemMutation = { __typename?: 'mutation_root', insert_bucket_item_one?: { __typename?: 'bucket_item', id: number } | null };
 
+export type CreateItemMutationVariables = Exact<{
+  text?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type CreateItemMutation = { __typename?: 'mutation_root', insert_item_one?: { __typename?: 'item', id: number } | null };
+
 export type GetBucketSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetBucketSubscription = { __typename?: 'subscription_root', bucket: Array<{ __typename?: 'bucket', id: number, items: Array<{ __typename?: 'bucket_item', id: number, item: { __typename?: 'item', id: number } }> }> };
+export type GetBucketSubscription = { __typename?: 'subscription_root', bucket: Array<{ __typename?: 'bucket', id: number, items: Array<{ __typename?: 'bucket_item', id: number, item: { __typename?: 'item', text?: string | null, id: number } }> }> };
 
 export type GetItemsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetItemsQuery = { __typename?: 'query_root', item: Array<{ __typename?: 'item', id: number }> };
+
+export type GetItemsSubscriptionSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetItemsSubscriptionSubscription = { __typename?: 'subscription_root', item: Array<{ __typename?: 'item', id: number, text?: string | null }> };
 
 import { IntrospectionQuery } from 'graphql';
 export default {
@@ -2534,6 +2595,14 @@ export default {
             "args": []
           },
           {
+            "name": "text",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
             "name": "updated_at",
             "type": {
               "kind": "NON_NULL",
@@ -2746,6 +2815,14 @@ export default {
             "args": []
           },
           {
+            "name": "text",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
             "name": "updated_at",
             "type": {
               "kind": "SCALAR",
@@ -2770,6 +2847,14 @@ export default {
           },
           {
             "name": "id",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Any"
+            },
+            "args": []
+          },
+          {
+            "name": "text",
             "type": {
               "kind": "SCALAR",
               "name": "Any"
@@ -4338,6 +4423,17 @@ export default {
   }
 } as unknown as IntrospectionQuery;
 
+export const CreateBucketDocument = gql`
+    mutation CreateBucket {
+  insert_bucket_one(object: {}) {
+    id
+  }
+}
+    `;
+
+export function useCreateBucketMutation() {
+  return Urql.useMutation<CreateBucketMutation, CreateBucketMutationVariables>(CreateBucketDocument);
+};
 export const InsertBucketItemDocument = gql`
     mutation InsertBucketItem($bucket_id: Int!, $item_id: Int!) {
   insert_bucket_item_one(
@@ -4352,6 +4448,17 @@ export const InsertBucketItemDocument = gql`
 export function useInsertBucketItemMutation() {
   return Urql.useMutation<InsertBucketItemMutation, InsertBucketItemMutationVariables>(InsertBucketItemDocument);
 };
+export const CreateItemDocument = gql`
+    mutation CreateItem($text: String) {
+  insert_item_one(object: {text: $text}) {
+    id
+  }
+}
+    `;
+
+export function useCreateItemMutation() {
+  return Urql.useMutation<CreateItemMutation, CreateItemMutationVariables>(CreateItemDocument);
+};
 export const GetBucketDocument = gql`
     subscription GetBucket {
   bucket {
@@ -4359,6 +4466,7 @@ export const GetBucketDocument = gql`
     items {
       id
       item {
+        text
         id
       }
     }
@@ -4379,4 +4487,16 @@ export const GetItemsDocument = gql`
 
 export function useGetItemsQuery(options?: Omit<Urql.UseQueryArgs<GetItemsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetItemsQuery>({ query: GetItemsDocument, ...options });
+};
+export const GetItemsSubscriptionDocument = gql`
+    subscription GetItemsSubscription {
+  item {
+    id
+    text
+  }
+}
+    `;
+
+export function useGetItemsSubscriptionSubscription<TData = GetItemsSubscriptionSubscription>(options: Omit<Urql.UseSubscriptionArgs<GetItemsSubscriptionSubscriptionVariables>, 'query'> = {}, handler?: Urql.SubscriptionHandler<GetItemsSubscriptionSubscription, TData>) {
+  return Urql.useSubscription<GetItemsSubscriptionSubscription, TData, GetItemsSubscriptionSubscriptionVariables>({ query: GetItemsSubscriptionDocument, ...options }, handler);
 };

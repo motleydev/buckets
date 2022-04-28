@@ -1,0 +1,5 @@
+mutation CreateBucket {
+  insert_bucket_one(object: {}) {
+    id
+  }
+}
