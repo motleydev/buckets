@@ -19,9 +19,6 @@ const Home: NextPage = () => {
         <Items />
         <Buckets />
       </main>
-      <p className="mx-auto text-center">
-        Dragging {draggedItem?.id} to {receivingBucket?.id}
-      </p>
     </div>
   );
 };

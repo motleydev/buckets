@@ -40,11 +40,11 @@ const useStore = create<GameState>()((set, get) => ({
     //   set({ gameStatus: status });
   },
   addToBucket: async () => {
-    //   set({ gameStatus: status });
-    console.log("test");
-    await fetch("/api/addToBucket", {
+    await fetch("/api/addBucketItem", {
+      method: "POST",
       body: JSON.stringify({
-        id: "123",
+        item_id: get().draggedItem?.id,
+        bucket_id: get().receivingBucket?.id,
       }),
     });
   },
