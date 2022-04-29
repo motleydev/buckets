@@ -1,9 +1,9 @@
 import React from "react";
-import { Bucket } from "../lib/graphql";
+import { GetBucketSubscription } from "../lib/graphql";
 import BucketComp from "./Bucket";
 
 type Props = {
-  buckets: Partial<Bucket>[];
+  buckets: GetBucketSubscription["bucket"];
 };
 
 export default function BucketList({ buckets = [] }: Props) {

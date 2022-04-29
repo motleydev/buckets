@@ -1,9 +1,9 @@
 import React from "react";
 import { DRAGGING_STATE, useStore } from "../store";
-import { Bucket } from "../lib/graphql";
+import { Bucket, GetBucketSubscription } from "../lib/graphql";
 
 type Props = {
-  bucket: Partial<Bucket>;
+  bucket: GetBucketSubscription["bucket"][number];
 };
 
 export default function BucketComp({ bucket }: Props) {
